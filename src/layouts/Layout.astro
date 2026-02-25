@@ -1,0 +1,262 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+}
+
+const { title, description, canonical } = Astro.props;
+const siteUrl = "https://thomas-cunin.fr";
+const canonicalUrl = canonical || siteUrl;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Thomas Cunin" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}/og-image.png`} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Thomas Cunin - Développeur Web Strasbourg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
+
+    <!-- Geo tags for local SEO -->
+    <meta name="geo.region" content="FR-67" />
+    <meta name="geo.placename" content="Strasbourg" />
+    <meta name="geo.position" content="48.5734;7.7521" />
+    <meta name="ICBM" content="48.5734, 7.7521" />
+
+    <!-- Preconnect fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Oswald:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          "name": "Thomas Cunin",
+          "url": siteUrl,
+          "jobTitle": "Développeur Web Fullstack Freelance",
+          "image": `${siteUrl}/moi.png`,
+          "email": "thomas.cunin@outlook.fr",
+          "description": "Développeur web freelance fullstack à Strasbourg, spécialisé en React, Next.js, Node.js, Symfony et PHP. Plus de 5 ans d'expérience dans la création de sites web et d'applications web sur mesure.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Strasbourg",
+            "addressRegion": "Grand Est",
+            "postalCode": "67000",
+            "addressCountry": "FR"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/thomas-cunin/",
+            "https://www.malt.fr/profile/thomascunin1"
+          ],
+          "knowsAbout": [
+            "Développement web",
+            "React",
+            "Next.js",
+            "Node.js",
+            "Symfony",
+            "PHP",
+            "JavaScript",
+            "TypeScript",
+            "Tailwind CSS",
+            "DevOps",
+            "Docker",
+            "Création de site web",
+            "Application web",
+            "API REST",
+            "GraphQL",
+            "PWA",
+            "Site vitrine",
+            "CMS headless",
+            "Développement sur mesure"
+          ]
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": `${siteUrl}/#business`,
+          "name": "Thomas Cunin - Développeur Web Freelance Strasbourg",
+          "url": siteUrl,
+          "image": `${siteUrl}/moi.png`,
+          "email": "thomas.cunin@outlook.fr",
+          "description": "Développeur web freelance à Strasbourg. Création de sites internet, applications web, intégration API et déploiement DevOps. React, Next.js, Symfony, Node.js.",
+          "founder": { "@id": `${siteUrl}/#person` },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Strasbourg",
+            "addressRegion": "Grand Est",
+            "postalCode": "67000",
+            "addressCountry": "FR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 48.5734,
+            "longitude": 7.7521
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Strasbourg" },
+            { "@type": "AdministrativeArea", "name": "Alsace" },
+            { "@type": "AdministrativeArea", "name": "Grand Est" }
+          ],
+          "priceRange": "$$",
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/thomas-cunin/",
+            "https://www.malt.fr/profile/thomascunin1"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Services de développement web",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Création de site web à Strasbourg",
+                  "description": "Développement de sites vitrines, e-commerce et applications web avec React, Next.js et Symfony"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Intégration API",
+                  "description": "Connexion de systèmes tiers, paiement en ligne, CRM, mailing et automatisations via REST et GraphQL"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "DevOps et déploiement",
+                  "description": "CI/CD, Docker, hébergement cloud et monitoring pour des applications web fiables et performantes"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Développement d'extensions web",
+                  "description": "Création d'extensions Chrome et navigateurs pour booster la productivité"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Application web progressive (PWA)",
+                  "description": "Développement d'applications web installables sur mobile, fonctionnant hors connexion avec une expérience native"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Site vitrine à contenu managé",
+                  "description": "Site vitrine moderne avec back-office intuitif pour gérer vos contenus en toute autonomie"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Développement web sur mesure à Strasbourg",
+                  "description": "Conception de solutions techniques sur mesure : plateforme métier, outil interne, tableau de bord et automatisation de processus"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${siteUrl}/#website`,
+          "name": "Thomas Cunin - Développeur Web Strasbourg",
+          "url": siteUrl,
+          "publisher": { "@id": `${siteUrl}/#person` },
+          "inLanguage": "fr-FR"
+        },
+        {
+          "@type": "WebPage",
+          "@id": `${siteUrl}/#webpage`,
+          "url": siteUrl,
+          "name": title,
+          "description": description,
+          "isPartOf": { "@id": `${siteUrl}/#website` },
+          "about": { "@id": `${siteUrl}/#person` },
+          "inLanguage": "fr-FR"
+        }
+      ]
+    })} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "JetBrains Mono", monospace;
+    color: #1e1e2e;
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .font-heading {
+    font-family: "Oswald", sans-serif;
+  }
+</style>

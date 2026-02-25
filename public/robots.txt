@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thomas-cunin.fr/sitemap-index.xml
