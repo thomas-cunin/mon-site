@@ -428,6 +428,41 @@ import Layout from "../layouts/Layout.astro";
   </footer>
 </Layout>
 
+<script>
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.querySelector<HTMLButtonElement>(".mobile-menu-btn");
+      const nav = document.querySelector<HTMLElement>(".nav");
+
+      if (!menuBtn || !nav) return;
+
+      const closeMenu = () => {
+        nav.classList.remove("nav--open");
+        menuBtn.classList.remove("is-open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      };
+
+      menuBtn.addEventListener("click", () => {
+        const isOpen = !nav.classList.contains("nav--open");
+
+        if (isOpen) {
+          nav.classList.add("nav--open");
+          menuBtn.classList.add("is-open");
+          menuBtn.setAttribute("aria-expanded", "true");
+        } else {
+          closeMenu();
+        }
+      });
+
+      nav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          closeMenu();
+        });
+      });
+    });
+  }
+</script>
+
 <style>
   /* ============ HEADER ============ */
   .header {
@@ -445,6 +480,7 @@ import Layout from "../layouts/Layout.astro";
     align-items: center;
     justify-content: space-between;
     padding: 20px 80px;
+    position: relative;
   }
 
   .logo {
@@ -529,6 +565,19 @@ import Layout from "../layouts/Layout.astro";
     height: 2px;
     background: #1e1e2e;
     border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .mobile-menu-btn.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .mobile-menu-btn.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-btn.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 
   /* ============ HERO ============ */
@@ -1112,7 +1161,20 @@ import Layout from "../layouts/Layout.astro";
 
   @media (max-width: 768px) {
     .header-inner { padding: 16px 20px; }
-    .nav { display: none; }
+    .nav {
+      position: absolute;
+      inset: 64px 20px auto 20px;
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+    .nav.nav--open {
+      display: flex;
+    }
     .cta-btn { display: none; }
     .mobile-menu-btn { display: flex; }
     .hero { padding: 48px 20px; gap: 24px; }
